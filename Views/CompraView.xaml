@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlushToyStore.Views.CompraView"
+             Title="CompraView"
+             BackgroundColor="#f0f0f5">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#444" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="#fff" />
+                <Setter Property="TextColor" Value="#333" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="#fff" />
+                <Setter Property="TextColor" Value="#333" />
+                <Setter Property="TitleColor" Value="#888" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#28a745" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="Margin" Value="0,10" />
+                <Setter Property="Padding" Value="10,5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Historial de Compras"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#333" />
+
+            <Frame BorderColor="#ddd" CornerRadius="10" HasShadow="True">
+                <ListView x:Name="CompraListView"
+                          ItemsSource="{Binding Compras}"
+                          SelectedItem="{Binding SelectedCompra}"
+                          ItemSelected="OnCompraSelected"
+                          BackgroundColor="#fff"
+                          SeparatorColor="#ddd">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+                                    <Label Text="{Binding Usuario.Nombre}" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" 
+                                           TextColor="#444" />
+                                    <Label Text="{Binding Peluche.NombreP}" 
+                                           VerticalOptions="Center" 
+                                           TextColor="#666" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+
+            <Picker x:Name="UsuarioPicker" 
+                    Title="Selecciona un Usuario"
+                    ItemsSource="{Binding Usuarios}"
+                    ItemDisplayBinding="{Binding Nombre}" />
+
+            <Picker x:Name="PeluchePicker" 
+                    Title="Selecciona un Peluche"
+                    ItemsSource="{Binding Peluches}"
+                    ItemDisplayBinding="{Binding NombreP}" />
+
+            <DatePicker x:Name="FechaCompraDatePicker" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Agregar" 
+                        Clicked="OnAddCompraClicked" />
+
+                <Button Text="Actualizar" 
+                        Clicked="OnUpdateCompraClicked" />
+
+                <Button Text="Eliminar" 
+                        Clicked="OnDeleteCompraClicked" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

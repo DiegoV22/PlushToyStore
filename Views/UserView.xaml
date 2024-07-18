@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PlushToyStore.ViewModels"
+             x:Class="PlushToyStore.Views.UserView"
+             Title="UserView"
+             BackgroundColor="#ffffff">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="#f5f5f5" />
+                <Setter Property="TextColor" Value="#333333" />
+                <Setter Property="PlaceholderColor" Value="#aaaaaa" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="0,5" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#4caf50" />
+                <Setter Property="TextColor" Value="#ffffff" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="Margin" Value="0,10" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Lista de Usuarios"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#333333" />
+
+            <Frame BorderColor="#dddddd" CornerRadius="10" HasShadow="True">
+                <ListView x:Name="UserListView"
+                          ItemsSource="{Binding Users}"
+                          SelectedItem="{Binding SelectedUser}"
+                          ItemSelected="OnUserSelected"
+                          BackgroundColor="#ffffff"
+                          SeparatorColor="#dddddd">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+                                    <Label Text="{Binding Nombre}" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" 
+                                           TextColor="#333333" />
+                                    <Label Text="{Binding CorreoElectronico}" 
+                                           VerticalOptions="Center" 
+                                           TextColor="#666666" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+
+            <Entry x:Name="NombreEntry" Placeholder="Nombre"
+                   Keyboard="Text"
+                   TextColor="#333333"
+                   PlaceholderColor="#aaaaaa" />
+
+            <Entry x:Name="CedulaEntry" Placeholder="Cédula"
+                   Keyboard="Numeric"
+                   TextColor="#333333"
+                   PlaceholderColor="#aaaaaa" />
+
+            <Entry x:Name="CorreoElectronicoEntry" Placeholder="Correo Electrónico"
+                   Keyboard="Email"
+                   TextColor="#333333"
+                   PlaceholderColor="#aaaaaa" />
+
+            <DatePicker x:Name="FechaNacimientoDatePicker"
+                        TextColor="#333333"
+                        BackgroundColor="#f5f5f5" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Agregar" 
+                        Clicked="OnAddUserClicked" />
+
+                <Button Text="Actualizar" 
+                        Clicked="OnUpdateUserClicked" />
+
+                <Button Text="Eliminar" 
+                        Clicked="OnDeleteUserClicked" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

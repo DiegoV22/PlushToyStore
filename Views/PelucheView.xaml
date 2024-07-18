@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PlushToyStore.ViewModels"
+             x:Class="PlushToyStore.Views.PelucheView"
+             Title="PelucheView"
+             BackgroundColor="#e0f7fa">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="#ffffff" />
+                <Setter Property="TextColor" Value="#004d40" />
+                <Setter Property="PlaceholderColor" Value="#00796b" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="0,5" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#388e3c" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="Margin" Value="0,10" />
+                <Setter Property="Padding" Value="10,5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Lista de Peluches"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#004d40" />
+
+            <Frame BorderColor="#004d40" CornerRadius="10" HasShadow="True">
+                <ListView x:Name="PelucheListView"
+                          ItemsSource="{Binding Peluches}"
+                          SelectedItem="{Binding SelectedPeluche}"
+                          ItemSelected="OnPelucheSelected"
+                          BackgroundColor="#ffffff"
+                          SeparatorColor="#004d40">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+                                    <Label Text="{Binding NombreP}" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" 
+                                           TextColor="#004d40" />
+                                    <Label Text="{Binding DescripcionP}" 
+                                           VerticalOptions="Center" 
+                                           TextColor="#00796b" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+
+            <Entry x:Name="NombrePEntry" 
+                   Placeholder="Nombre"
+                   TextColor="#004d40"
+                   PlaceholderColor="#00796b" />
+
+            <Entry x:Name="TamanoPEntry" 
+                   Placeholder="Tamaño"
+                   TextColor="#004d40"
+                   PlaceholderColor="#00796b" />
+
+            <Entry x:Name="DescripcionPEntry" 
+                   Placeholder="Descripción"
+                   TextColor="#004d40"
+                   PlaceholderColor="#00796b" />
+
+            <Entry x:Name="PrecioEntry" 
+                   Placeholder="Precio"
+                   TextColor="#004d40"
+                   PlaceholderColor="#00796b" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Agregar" 
+                        Clicked="OnAddPelucheClicked" />
+
+                <Button Text="Actualizar" 
+                        Clicked="OnUpdatePelucheClicked" />
+
+                <Button Text="Eliminar" 
+                        Clicked="OnDeletePelucheClicked" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
